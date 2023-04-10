@@ -1,8 +1,8 @@
-# Dissecting an Email Regex
+# The Regex Cinematic Universe
 
-If you've ever used regular expressions before, you probably know how these character strings are a whole world of their own. It's almost as if they are Marvel or Star Wars characters with this whole cinematic universe built around them. Now they may seem a little daunting, but maybe by the end of this you'll see how these guys are just as deserving of the big screen as Spider-Man or any one of the Skywalkers.
+If you've ever used regular expressions before, you probably know how these character strings are a whole world of their own. It's almost as if they are Marvel or Star Wars characters with this whole cinematic universe built around them. Now they may seem a little daunting, but maybe by the end of this you'll see how these guys are just as deserving of a Hollywood premier as Spider-Man or any one of the Skywalkers.
 
-Here, I'll break down one of the most common regex's: the common email id. By analyzing this specific regualr expression, we'll better understand them as a whole.
+Here, I'll break down one of the most common regex's: the email id. By analyzing this specific regualr expression, we'll better understand them as a whole.
 
 ## Summary
 
@@ -36,7 +36,7 @@ Let's analyze the specific components of this regex:
 
 The `/` at the beginning and end denotes that this is indeed a regex. When you enter a regex into a search and replace bar in a text editor (depending on which one you use), for example, you may need to insert these slashes to show that you are using a regex.
 
-The `@` in the middle is nothing special. It's a literal character as it isn't within any brackets. This means that there must be an `@` symbol between the username and the domain name, aligning our search with the structure of all email addresses.
+The `@` in the middle is nothing special. It's a literal character as it isn't within brackets or anything. This means that there must be an `@` symbol between the username and the domain name, aligning our search with the structure of all email addresses.
 
 Finally, the backslash `\` is to escape the `.` immediately after it. Otherwise, this `.` would be interpreted as a regex operation rather than a literal character. Just like the `@`, there is a `.` in every email address, so we put it in there literally.
 
@@ -80,25 +80,25 @@ Here are some other character classes:
 
 ### Flags
 
-So this is kinda awkward...there's not flags in this regex either. But I'll teach you young padawan. A flag is placed after the second slash to define extra functionality. We could append the `g` flag which searches globally and tests all matched strings against the regex. But this is already happening, so we can forget about it.
+So this is kinda awkward...there's not flags in this regex either. But I'll teach you anyway, young padawan. A flag is placed after the second slash to define extra functionality. We could append the `g` flag which searches globally and tests all matched strings against the regex. But this is already happening, so we can forget about it.
 
 Here are some other flags:
 
-* i - For case sensitive searches (Which we can also put in but this, too, is accounted for)
+* `i` - For case sensitive searches (Which we can also put in but this, too, is accounted for)
 
-* m - For multiline searches
+* `m` - For multiline searches
 
 ### Grouping and Capturing
 
-The parenthesis `()` denote a subexpression. These look for an exact match unless told to do otherwise. Just another one of the superpowers regular expressions have.
+Grouping/capturing is another common regex technique, and the only instance of it in here is the parenthesis `()` which denote a subexpression. Subexpressions look for an exact match unless told to do otherwise. Just another one of the superpowers regular expressions have.
 
 ### Bracket Expressions
 
 Anything inside the brackets `[]` represent a range of characters that we want to match. Since there are multiple sets of brackets, let's explain what each one does:
 
-* The first set of brackets is for the username of the email address. `a-zA-Z0-9` tells us that any alphanumeric characters can exist in this part of the string. The special characters `._%-` are also included.
+* The first set of brackets is for the username of the email address. `a-zA-Z0-9` tells us that any alphanumeric characters can exist in this part of the string. The special characters `._%-` are also acceptable.
 
-* The second set of brackets is for the domain name of the email address. Again, all alphanumeric characters are acceptable, but only `.` and `-` can be the special characters.
+* The second set of brackets is for the domain of the email address. Again, all alphanumeric characters are acceptable, but only `.` and `-` can be the special characters.
 
 * The third set of brackets is for the top level domain of the domain name (the .com, .net, .org, etc). This can only be alphabetical characters due to the `a-zA-Z`.
 
@@ -124,14 +124,24 @@ Say I wanted to find two emails back to back. I would add a \1 to the end:
 /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*\1$/
 ```
 
-This \1 references the first (and only) subexpression in the parenthesis `()`. Now we will be searching for two emails that are back to back.
+This \1 references the first (and only) subexpression. Now we will be searching for two emails that are back to back.
 
 ### Look-ahead and Look-behind
 
+Another regex component not incorporated in here are lookarounds. These are used to check what surrounds a certain phrase. For example, if we wanted them in this example, we can follow the subexpression with `(?=John)` to see if the name John comes after the email.
+
+Here are some other look arounds:
+
+* `(?<=John)` to check if John comes before the email
+
+* Replace the equal sign with an exclamation point to make it a negative lookaround `(?!John)` `(?<!John)`
+
+### Conclusion
+
+And there you have it. We just learned a little more about regular expressions by dissecting one. Now it may not be Spider-Man fighting the Green Goblin or a lightsaber fight on a Star Destroyer, but these little guys give us much more capabilities in our dev journeys. Is that worthy of the big screen? I think so. Your move Hollywood!
+
 ## Author
 
-Hello, my name is Walden Light, and I am a web developer from Boulder, Colorado. I love to code and be outdoors, sometimes simultaneously. (Note to self: Add "multi-tasker" to resume, that'll get us the big tech job).
+Hello, my name is Walden Light, and I am a web developer from Boulder, Colorado. I love to code and be outdoors.
 
 Check out my [GitHub](github.com/waldenlight)
-
-A short section about the author with a link to the author's GitHub profile (replace with your information and a link to your profile)
